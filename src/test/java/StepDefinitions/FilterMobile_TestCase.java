@@ -45,9 +45,7 @@ public class FilterMobile_TestCase extends Library{
     public void filtered_products(){
         System.out.println("After Filter Result: ");
         se.getElementText(fp.afterFilterResult);
-        se.waits();
-        se.getScreenshot("FilteredProducts");
-        se.quitdriver();
+
     }
 }
 

@@ -29,7 +29,7 @@ public class TitlePrice_TestCase extends Library {
     @Then("^user must see his/her search result and get title and price")
     public void get_title_and_price_of_items(){
         tps.getMultipleResultsdata();
-        se.quitdriver();
+
     }
 
 }

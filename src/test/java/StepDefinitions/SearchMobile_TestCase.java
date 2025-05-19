@@ -16,7 +16,6 @@ public class SearchMobile_TestCase extends Library {
     @Given("user launched the flipkart application")
     public void launchapp() throws IOException{
         // Code to launch the Flipkart application goes here
-        launchapplication();
         sp = new SearchPage(driver);
         se = new SeleniumReusablle(driver);
     }
@@ -60,6 +59,5 @@ public class SearchMobile_TestCase extends Library {
     @And("print the fourth product from the list")
     public void print_fourth_product(){
         sp.getReqSearchResultText();
-        se.quitdriver();
     }
 }

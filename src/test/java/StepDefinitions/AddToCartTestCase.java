@@ -47,7 +47,6 @@ public class AddToCartTestCase extends Library{
         addCart.enterPincode();
         se.waits();
         addCart.assertDeliveryText();
-        se.quitdriver();
     }
     
 }

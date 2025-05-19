@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>flipkartautomation</artifactId>
+    <artifactId>Flipkart_SeleniumAutomation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -114,6 +114,14 @@
 
         <!-- Add your dependencies here -->
     </dependencies>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+    </build>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

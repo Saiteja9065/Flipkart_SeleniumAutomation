@@ -37,9 +37,7 @@ public class HoverToys_TestCase extends Library{
 
     @And("user must see relevant products based on the selected category")
     public void relevant_products(){
-        se = new SeleniumReusablle(driver);
-        se.getScreenshot("RelevantProducts");
-        se.quitdriver();
+        bt.reviewresults();
     }
     
 }

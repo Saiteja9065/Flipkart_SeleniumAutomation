@@ -1,10 +1,12 @@
 package reusableFunctions;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
+import io.cucumber.java.Scenario;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -53,19 +55,19 @@ public class SeleniumReusablle extends Library {
         }
     }
 
-    public void getScreenshot(String fileName) {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-
-        try {
-            String path = System.getProperty("user.dir") + "/screenshots/" + fileName + ".png";
-            FileUtils.copyFile(source, new File(path));
-            System.out.println("Screenshot taken: " + path);
-        } catch (Exception e) {
-            System.out.println("Unable to take screenshot.");
-            e.printStackTrace();
-        }
-    }
+//    public void getScreenshot(String fileName) {
+//        TakesScreenshot ts = (TakesScreenshot) driver;
+//        File source = ts.getScreenshotAs(OutputType.FILE);
+//
+//        try {
+//            String path = System.getProperty("user.dir") + "/screenshots/" + fileName + ".png";
+//            FileUtils.copyFile(source, new File(path));
+//            System.out.println("Screenshot taken: " + path);
+//        } catch (Exception e) {
+//            System.out.println("Unable to take screenshot.");
+//            e.printStackTrace();
+//        }
+//    }
 
     public void getMultipleResultText(List<WebElement> elements) {
         try {
@@ -197,6 +199,27 @@ public class SeleniumReusablle extends Library {
                 driver.switchTo().window(window);
                 System.out.println("Switched to new window: " + window);
             }
+        }
+
+    }
+
+    public void attachScreenshot(Scenario cucumberScenario){
+        try {
+            // Take screenshot as file
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String screenshotPath = System.getProperty("user.dir") + "/target/screenshots/" + System.currentTimeMillis() + ".png";
+            File destFile = new File(screenshotPath);
+            FileUtils.copyFile(srcFile, destFile);
+
+            // Attach for Cucumber HTML report
+            byte[] screenshotBytes = Files.readAllBytes(destFile.toPath());
+            cucumberScenario.attach(screenshotBytes, "image/png", "Flipkart_seleniumautomation");
+
+            // Attach for ExtentReports (ExtentCucumberAdapter will pick up from path)
+            cucumberScenario.log("Screenshot: " + destFile.getAbsolutePath());
+        } catch (Exception e) {
+            System.out.println("Unable to take or attach screenshot.");
+            e.printStackTrace();
         }
 
     }

@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import baseClass.Library;
 import reusableFunctions.SeleniumReusablle;
 
+import java.util.List;
+
 public class BabyKidsToys extends Library{
 
     SeleniumReusablle se; // WebDriver instance for interacting with the browser
@@ -31,8 +33,11 @@ public class BabyKidsToys extends Library{
     @FindBy(xpath="//*[@id='container']/div/div[2]/div/div/div/div[3]/a[6]")
     WebElement babyKidsToysCategory;
 
-    @FindBy(xpath="//div[normalize-space()='Price -- High to Low']")
+    @FindBy(xpath="//div[normalize-space()='Price -- Low to High']")
     WebElement priceHighToLowSelect;
+
+    @FindBy(xpath = "//a[@class='DMMoT0']/.")
+    List<WebElement> toyresults;
 
     public void hoverFashionCategory(){
         se = new SeleniumReusablle(driver);
@@ -63,5 +68,9 @@ public class BabyKidsToys extends Library{
     public void selectPriceHighToLow(){
         se.ClickElement(priceHighToLowSelect);
         se.waits();
+    }
+
+    public void reviewresults(){
+        se.getMultipleResultText(toyresults);
     }
 }
